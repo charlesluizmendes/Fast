@@ -1,4 +1,5 @@
 from typing import List
+from datetime import datetime
 
 from src.domain.shared.aggregate_root_interface import AggregateRootInterface
 from src.domain.exceptions.domain_exception import DomainException
@@ -20,7 +21,6 @@ class Author(AggregateRootInterface):
         super().__init__(uid)
         self.name = name
         self.books = []
-        self.books = books if books is not None else []
 
         # Disparar evento de criação do autor
-        self.add_domain_event(AuthorCreatedEvent(self.name))
+        self.add_domain_event(AuthorCreatedEvent(datetime.now(), self.name))

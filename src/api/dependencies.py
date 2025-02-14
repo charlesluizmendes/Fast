@@ -5,16 +5,16 @@ from src.infrastructure.repositories.book_repository import BookRepository
 from src.application.services.author_service import AuthorService
 from src.application.services.book_service import BookService
 
-from src.domain.shared.entity import Entity
+from src.domain.shared.event.dispatcher.event_dispatcher import EventDispatcher
 from src.domain.events.author_created_event import AuthorCreatedEvent
 from src.domain.events.book_created_event import BookCreatedEvent
-from src.application.eventHandlers.author_created_event_handler import AuthorCreatedHandler
-from src.application.eventHandlers.book_created_event_handler import BookCreatedHandler
+from src.application.eventHandlers.author_created_event_handler import AuthorCreatedEventHandler
+from src.application.eventHandlers.book_created_event_handler import BookCreatedEventHandler
 
 
-# Registrar o handler para o evento específico
-Entity.register_event_handler(AuthorCreatedEvent, AuthorCreatedHandler.handle)
-Entity.register_event_handler(BookCreatedEvent, BookCreatedHandler.handle)
+# Registrar eventHandlers 
+EventDispatcher.register_event_handler(AuthorCreatedEvent, AuthorCreatedEventHandler())
+EventDispatcher.register_event_handler(BookCreatedEvent, BookCreatedEventHandler())
 
 # Criando o banco de dados e sessões
 db_context = DatabaseContext()

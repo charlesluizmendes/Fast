@@ -1,5 +1,5 @@
-from src.domain.shared.notification import Notification, NotificationEvent
-from src.domain.shared.event_dispatcher import EventDispatcher
+from src.domain.shared.event.event_interface import EventInterface
+from src.domain.shared.event.dispatcher.event_dispatcher import EventDispatcher
 
 
 class Entity:
@@ -7,43 +7,22 @@ class Entity:
 
     def __init__(self, uid: str):
         self._id: str = uid
-        self._notification = Notification()
+        self._events: list[EventInterface] = []
 
     @property
     def id(self) -> str:
         return self._id
 
+    def add_domain_event(self, event: EventInterface) -> None:
+        """Adiciona um evento de domínio à entidade e notifica o despachante."""
+        self._events.append(event)
+        self._dispatcher.notify(event)
+
     @property
-    def notification(self) -> Notification:
-        """Retorna o gerenciador de notificações da entidade."""
-        return self._notification
+    def domain_events(self) -> list[EventInterface]:
+        """Retorna os eventos de domínio registrados na entidade."""
+        return self._events
 
-    def add_domain_event(self, event: NotificationEvent):
-        """Adiciona um evento de domínio e o dispara imediatamente."""
-        self._notification.add_event(event)
-        Entity._dispatcher.dispatch(event)  # Usa a instância estática corretamente
-
-    def remove_domain_event(self, event: NotificationEvent):
-        """Remove um evento específico da lista de notificações."""
-        self._notification.remove_event(event)
-
-    def clear_domain_events(self):
-        """Remove todos os eventos registrados na entidade."""
-        self._notification.clear_events()
-
-    def has_domain_events(self) -> bool:
-        """Verifica se a entidade possui eventos de domínio pendentes."""
-        return self._notification.has_events()
-
-    def get_domain_events(self) -> list[NotificationEvent]:
-        """Retorna a lista de eventos de domínio armazenados."""
-        return self._notification.events
-
-    def get_messages_by_context(self, context: str) -> str:
-        """Retorna todas as mensagens de um determinado contexto de eventos."""
-        return self._notification.messages(context)
-
-    @classmethod
-    def register_event_handler(cls, event_type, handler):
-        """Registra um handler para um evento específico."""
-        Entity._dispatcher.register_handler(event_type, handler)
+    def clear_domain_events(self) -> None:
+        """Remove todos os eventos registrados."""
+        self._events.clear()

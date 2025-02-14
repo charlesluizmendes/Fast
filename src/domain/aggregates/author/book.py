@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from src.domain.shared.entity import Entity
 from src.domain.exceptions.domain_exception import DomainException
 from src.domain.events.book_created_event import BookCreatedEvent
@@ -19,4 +21,4 @@ class Book(Entity):
         self.author_id = author_id
 
         # Disparar evento de criação do livro
-        self.add_domain_event(BookCreatedEvent(self.title, self.author_id))
+        self.add_domain_event(BookCreatedEvent(datetime.now(), self.title, self.author_id))
