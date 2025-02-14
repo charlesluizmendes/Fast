@@ -7,5 +7,5 @@ from src.api.dependencies import get_book_service
 router = APIRouter(prefix="/books", tags=["Books"])
 
 @router.post("/", response_model=BookResponseDTO)
-def create_book(book: BookCreateDTO, service: BookService = Depends(get_book_service)):
+async def create_book(book: BookCreateDTO, service: BookService = Depends(get_book_service)):
     return service.create_book(book)

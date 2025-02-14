@@ -1,7 +1,7 @@
 from typing import List
 import uuid 
 
-from src.application.services.author_service_interface import AuthorServiceInterface
+from src.application.interfaces.author_service_interface import AuthorServiceInterface
 from src.application.dtos.author_dto import AuthorCreateDTO, AuthorResponseDTO
 from src.application.dtos.book_dto import BookResponseDTO
 from src.domain.aggregates.author.author import Author

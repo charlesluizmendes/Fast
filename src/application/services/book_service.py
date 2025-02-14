@@ -1,6 +1,6 @@
 import uuid 
 
-from src.application.services.book_service_interface import BookServiceInterface
+from src.application.interfaces.book_service_interface import BookServiceInterface
 from src.application.dtos.book_dto import BookCreateDTO, BookResponseDTO
 from src.domain.aggregates.author.book import Book 
 from src.domain.aggregates.author.book_repository_interface import BookRepositoryInterface
