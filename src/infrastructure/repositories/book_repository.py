@@ -16,15 +16,16 @@ class BookRepository(BookRepositoryInterface):
         book = self.db_session.query(BookModel).filter(BookModel.id == uid).first()
         if not book:
             raise Exception(f"Livro com ID {uid} não encontrado.")
-        return book  # Retorna a instância do modelo diretamente
-
+        return book  
+    
     def find_all(self) -> list[Book]:
         """Retorna todos os livros armazenados."""
         return self.db_session.query(BookModel).all()
 
     def create(self, book: Book) -> None:
         """Adiciona um novo livro ao banco de dados."""
-        self.db_session.add(book)
+        db_book = BookModel(id=book.id, title=book.title, author_id=book.author_id)
+        self.db_session.add(db_book)
         self.db_session.commit()
 
     def update(self, book: Book) -> None:

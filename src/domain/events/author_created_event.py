@@ -7,3 +7,4 @@ class AuthorCreatedEvent(NotificationEvent):
     def __init__(self, author_name: str):
         """Inicializa o evento com o nome do autor."""
         super().__init__(message=f"Autor {author_name} foi criado", context="AuthorCreated")
+        self.author_name = author_name

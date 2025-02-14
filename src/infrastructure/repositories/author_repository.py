@@ -16,8 +16,8 @@ class AuthorRepository(AuthorRepositoryInterface):
         author = self.db_session.query(AuthorModel).filter(AuthorModel.id == uid).first()
         if not author:
             raise Exception(f"Autor com ID {uid} não encontrado.")
-        return author  # Retorna a instância do modelo diretamente
-
+        return author
+    
     def find_all(self) -> list[Author]:
         """Retorna todos os autores armazenados junto com seus livros."""
         return (
@@ -28,7 +28,8 @@ class AuthorRepository(AuthorRepositoryInterface):
 
     def create(self, author: Author) -> None:
         """Adiciona um novo autor ao banco de dados."""
-        self.db_session.add(author)
+        db_author = AuthorModel(id=author.id, name=author.name)
+        self.db_session.add(db_author)
         self.db_session.commit()
 
     def update(self, author: Author) -> None:

@@ -1,4 +1,4 @@
-from domain.events.book_created_event import BookCreatedEvent
+from src.domain.events.book_created_event import BookCreatedEvent
 
 
 class BookCreatedHandler:
