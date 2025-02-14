@@ -1,6 +1,8 @@
+from typing import Union
 from fastapi import FastAPI
-from routes.author_routes import router as author_router
-from routes.book_routes import router as book_router
+
+from api.routes.author_routes import router as author_router 
+from api.routes.book_routes import router as book_router
 
 app = FastAPI(title="Book Management API", version="1.0")
 
