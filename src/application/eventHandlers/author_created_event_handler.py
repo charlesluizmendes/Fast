@@ -7,4 +7,4 @@ class AuthorCreatedEventHandler(EventHandlerInterface):
 
     def handle(self, event: AuthorCreatedEvent) -> None:
         """Processa o evento de criação de autor."""
-        print(f"Evento: {event.author_name}")
+        print(f"Evento: Autor {event.author_name} registrado.")
