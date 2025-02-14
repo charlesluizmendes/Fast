@@ -3,7 +3,7 @@ from typing import List
 
 from src.application.services.author_service import AuthorService
 from src.application.dtos.author_dto import AuthorCreateDTO, AuthorResponseDTO
-from src.api.dependencies import get_author_service
+from src.api.ioc import get_author_service
 
 router = APIRouter(prefix="/authors", tags=["Authors"])
 
