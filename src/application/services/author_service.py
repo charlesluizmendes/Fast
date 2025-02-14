@@ -1,7 +1,10 @@
+from typing import List
+
 from application.services.author_service_interface import AuthorServiceInterface
+from application.dtos.author_dto import AuthorCreateDTO, AuthorAddBookDTO, AuthorResponseDTO
+from application.dtos.book_dto import BookResponseDTO
 from domain.aggregates.author.author_repository_interface import AuthorRepositoryInterface
 from domain.aggregates.author.book_repository_interface import BookRepositoryInterface
-from application.dtos.author_dto import AuthorCreateDTO, AuthorAddBookDTO, AuthorResponseDTO
 
 
 class AuthorService(AuthorServiceInterface):
@@ -11,6 +14,17 @@ class AuthorService(AuthorServiceInterface):
         """Inicializa o serviço com os repositórios injetados."""
         self.author_repository = author_repository
         self.book_repository = book_repository
+
+    def get_all_authors(self) -> List[AuthorResponseDTO]:
+        """Obtém todos os autores e retorna uma lista de DTOs de resposta."""
+        authors = self.author_repository.find_all()
+        author_dtos = []
+
+        for author in authors:
+            books = [BookResponseDTO(id=book.id, title=book.title, author_name=author.name) for book in author.books]
+            author_dtos.append(AuthorResponseDTO(id=author.id, name=author.name, books=books))
+
+        return author_dtos
 
     def create_author(self, author_dto: AuthorCreateDTO) -> AuthorResponseDTO:
         """Cria um novo autor e retorna um DTO de resposta."""

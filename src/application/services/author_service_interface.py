@@ -1,4 +1,5 @@
 from abc import ABC, abstractmethod
+from typing import List
 from application.dtos.author_dto import AuthorCreateDTO, AuthorAddBookDTO, AuthorResponseDTO
 
 
@@ -13,4 +14,9 @@ class AuthorServiceInterface(ABC):
     @abstractmethod
     def add_book_to_author(self, author_id: str, book_dto: AuthorAddBookDTO) -> None:
         """Adiciona um livro a um autor existente."""
+        pass
+
+    @abstractmethod
+    def get_all_authors(self) -> List[AuthorResponseDTO]:
+        """Obtém todos os autores e retorna uma lista de DTOs de resposta."""
         pass
