@@ -1,4 +1,4 @@
-from domain.events.book_added_event import BookAddedEvent
+from src.domain.events.book_added_event import BookAddedEvent
 
 
 class BookAddedHandler:

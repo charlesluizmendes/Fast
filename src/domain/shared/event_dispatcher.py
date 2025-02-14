@@ -1,5 +1,6 @@
 from typing import Type, Dict, List, Callable
-from notification import NotificationEvent
+
+from src.domain.shared.notification import NotificationEvent
 
 
 class EventDispatcher:

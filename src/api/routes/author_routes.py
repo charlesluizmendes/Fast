@@ -1,9 +1,9 @@
 from fastapi import APIRouter, Depends
 from typing import List
 
-from application.services.author_service import AuthorService
-from application.dtos.author_dto import AuthorCreateDTO, AuthorAddBookDTO, AuthorResponseDTO
-from api.dependencies import get_author_service
+from src.application.services.author_service import AuthorService
+from src.application.dtos.author_dto import AuthorCreateDTO, AuthorAddBookDTO, AuthorResponseDTO
+from src.api.dependencies import get_author_service
 
 router = APIRouter(prefix="/authors", tags=["Authors"])
 

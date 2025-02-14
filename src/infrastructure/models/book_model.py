@@ -1,7 +1,7 @@
 from sqlalchemy import Column, String, ForeignKey
 from sqlalchemy.orm import relationship
 
-from infrastructure.database.database_context import Base
+from src.infrastructure.database.database_context import Base
 
 
 class BookModel(Base):

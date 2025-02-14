@@ -1,7 +1,7 @@
 from pydantic import BaseModel
 from typing import List
 
-from application.dtos.book_dto import BookResponseDTO 
+from src.application.dtos.book_dto import BookResponseDTO 
 
 
 class AuthorCreateDTO(BaseModel):

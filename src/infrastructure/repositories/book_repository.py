@@ -1,8 +1,8 @@
 from sqlalchemy.orm import Session
 
-from domain.aggregates.author.book import Book
-from domain.aggregates.author.book_repository_interface import BookRepositoryInterface
-from infrastructure.models.book_model import BookModel
+from src.domain.aggregates.author.book import Book
+from src.domain.aggregates.author.book_repository_interface import BookRepositoryInterface
+from src.infrastructure.models.book_model import BookModel
 
 
 class BookRepository(BookRepositoryInterface):

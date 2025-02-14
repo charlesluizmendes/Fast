@@ -1,4 +1,4 @@
-from domain.events.author_created_event import AuthorCreatedEvent
+from src.domain.events.author_created_event import AuthorCreatedEvent
 
 
 class AuthorCreatedHandler:

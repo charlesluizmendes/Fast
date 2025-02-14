@@ -1,9 +1,9 @@
 from fastapi import Depends
-from infrastructure.database.database_context import DatabaseContext
-from infrastructure.repositories.author_repository import AuthorRepository
-from infrastructure.repositories.book_repository import BookRepository
-from application.services.author_service import AuthorService
-from application.services.book_service import BookService
+from src.infrastructure.database.database_context import DatabaseContext
+from src.infrastructure.repositories.author_repository import AuthorRepository
+from src.infrastructure.repositories.book_repository import BookRepository
+from src.application.services.author_service import AuthorService
+from src.application.services.book_service import BookService
 
 # Criando o banco de dados e sessões
 db_context = DatabaseContext()

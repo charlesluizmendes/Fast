@@ -1,4 +1,4 @@
-from shared.notification import NotificationEvent
+from src.domain.shared.notification import NotificationEvent
 
 
 class AuthorCreatedEvent(NotificationEvent):

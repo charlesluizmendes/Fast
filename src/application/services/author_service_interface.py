@@ -1,6 +1,7 @@
 from abc import ABC, abstractmethod
 from typing import List
-from application.dtos.author_dto import AuthorCreateDTO, AuthorAddBookDTO, AuthorResponseDTO
+
+from src.application.dtos.author_dto import AuthorCreateDTO, AuthorAddBookDTO, AuthorResponseDTO
 
 
 class AuthorServiceInterface(ABC):

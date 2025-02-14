@@ -1,5 +1,5 @@
-from shared.repository_interface import RepositoryInterface
-from book import Book
+from src.domain.shared.repository_interface import RepositoryInterface
+from src.domain.aggregates.author.book import Book
 
 
 class BookRepositoryInterface(RepositoryInterface[Book]):

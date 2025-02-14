@@ -1,5 +1,5 @@
-from notification import Notification, NotificationEvent
-from event_dispatcher import EventDispatcher
+from src.domain.shared.notification import Notification, NotificationEvent
+from src.domain.shared.event_dispatcher import EventDispatcher
 
 
 class Entity:

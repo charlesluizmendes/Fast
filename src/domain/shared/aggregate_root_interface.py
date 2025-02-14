@@ -1,5 +1,6 @@
 from abc import ABC
-from entity import Entity
+
+from src.domain.shared.entity import Entity
 
 
 class AggregateRootInterface(Entity, ABC):

@@ -1,10 +1,10 @@
 from typing import List
 
-from application.services.author_service_interface import AuthorServiceInterface
-from application.dtos.author_dto import AuthorCreateDTO, AuthorAddBookDTO, AuthorResponseDTO
-from application.dtos.book_dto import BookResponseDTO
-from domain.aggregates.author.author_repository_interface import AuthorRepositoryInterface
-from domain.aggregates.author.book_repository_interface import BookRepositoryInterface
+from src.application.services.author_service_interface import AuthorServiceInterface
+from src.application.dtos.author_dto import AuthorCreateDTO, AuthorAddBookDTO, AuthorResponseDTO
+from src.application.dtos.book_dto import BookResponseDTO
+from src.domain.aggregates.author.author_repository_interface import AuthorRepositoryInterface
+from src.domain.aggregates.author.book_repository_interface import BookRepositoryInterface
 
 
 class AuthorService(AuthorServiceInterface):

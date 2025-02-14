@@ -1,5 +1,6 @@
 from abc import ABC, abstractmethod
-from application.dtos.book_dto import BookCreateDTO, BookResponseDTO
+
+from src.application.dtos.book_dto import BookCreateDTO, BookResponseDTO
 
 
 class BookServiceInterface(ABC):

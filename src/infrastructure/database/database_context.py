@@ -1,13 +1,14 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker, declarative_base
-from api.config import settings
+
+from src.api.config import config
 
 Base = declarative_base()
 
 class DatabaseContext:
     """Gerencia a conexão e sessões do banco de dados."""
 
-    def __init__(self, database_url: str = settings.DATABASE_URL):
+    def __init__(self, database_url: str = config.DATABASE_URL):
         """Inicializa o contexto do banco de dados com a URL configurada."""
         self.engine = create_engine(database_url, echo=True)
         self.SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=self.engine)

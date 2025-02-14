@@ -1,5 +1,5 @@
-from shared.entity import Entity
-from domain.exceptions import DomainException
+from src.domain.shared.entity import Entity
+from src.domain.exceptions.domain_exception import DomainException
 
 
 class Book(Entity):
