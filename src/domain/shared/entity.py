@@ -18,11 +18,10 @@ class Entity:
         """Retorna o gerenciador de notificações da entidade."""
         return self._notification
 
-    def add_domain_event(self, message: str, context: str):
+    def add_domain_event(self, event: NotificationEvent):
         """Adiciona um evento de domínio e o dispara imediatamente."""
-        event = NotificationEvent(message, context)
         self._notification.add_event(event)
-        self._dispatcher.dispatch(event)
+        Entity._dispatcher.dispatch(event)  # Usa a instância estática corretamente
 
     def remove_domain_event(self, event: NotificationEvent):
         """Remove um evento específico da lista de notificações."""
@@ -47,4 +46,4 @@ class Entity:
     @classmethod
     def register_event_handler(cls, event_type, handler):
         """Registra um handler para um evento específico."""
-        cls._dispatcher.register_handler(event_type, handler)
+        Entity._dispatcher.register_handler(event_type, handler)

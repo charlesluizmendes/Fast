@@ -1,8 +1,9 @@
 from typing import List
 
 from src.domain.shared.aggregate_root_interface import AggregateRootInterface
-from src.domain.aggregates.author.book import Book
 from src.domain.exceptions.domain_exception import DomainException
+from src.domain.aggregates.author.book import Book
+from src.domain.events.author_created_event import AuthorCreatedEvent
 
 
 class Author(AggregateRootInterface):
@@ -22,4 +23,4 @@ class Author(AggregateRootInterface):
         self.books = books if books is not None else []
 
         # Disparar evento de criação do autor
-        self.add_domain_event(f"Autor {self.name} criado", "AuthorCreated")
+        self.add_domain_event(AuthorCreatedEvent(self.name))
