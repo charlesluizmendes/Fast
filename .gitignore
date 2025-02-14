@@ -16,5 +16,3 @@ venv/
 # Databases and migrations
 src/migrations/
 *.db
-*.faiss
-*.pkl
