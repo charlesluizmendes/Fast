@@ -1,6 +1,4 @@
 from sqlalchemy.orm import Session
-
-from src.domain.aggregates.author.book import Book
 from src.domain.aggregates.author.book_repository_interface import BookRepositoryInterface
 from src.infrastructure.models.book_model import BookModel
 
@@ -11,25 +9,23 @@ class BookRepository(BookRepositoryInterface):
     def __init__(self, db_session: Session):
         self.db_session = db_session
 
-    def find(self, uid: str) -> Book:
-        """Busca um livro pelo ID."""
+    def find(self, uid: str) -> BookModel:
+        """Busca um livro pelo ID, retornando a instância do modelo ORM."""
         book = self.db_session.query(BookModel).filter(BookModel.id == uid).first()
         if not book:
             raise Exception(f"Livro com ID {uid} não encontrado.")
-        return Book(uid=book.id, title=book.title, author_id=book.author_id)
+        return book  # Retorna a instância do modelo diretamente
 
-    def find_all(self) -> list[Book]:
+    def find_all(self) -> list[BookModel]:
         """Retorna todos os livros armazenados."""
-        books = self.db_session.query(BookModel).all()
-        return [Book(uid=b.id, title=b.title, author_id=b.author_id) for b in books]
+        return self.db_session.query(BookModel).all()
 
-    def create(self, book: Book) -> None:
+    def create(self, book: BookModel) -> None:
         """Adiciona um novo livro ao banco de dados."""
-        db_book = BookModel(id=book.id, title=book.title, author_id=book.author_id)
-        self.db_session.add(db_book)
+        self.db_session.add(book)
         self.db_session.commit()
 
-    def update(self, book: Book) -> None:
+    def update(self, book: BookModel) -> None:
         """Atualiza um livro existente."""
         db_book = self.db_session.query(BookModel).filter(BookModel.id == book.id).first()
         if not db_book:
