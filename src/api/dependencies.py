@@ -21,5 +21,5 @@ def get_book_repo():
 def get_author_service(author_repo=Depends(get_author_repo), book_repo=Depends(get_book_repo)):
     return AuthorService(author_repo, book_repo)
 
-def get_book_service(book_repo=Depends(get_book_repo)):
-    return BookService(book_repo)
+def get_book_service(book_repo=Depends(get_book_repo), author_repo=Depends(get_author_repo)):
+    return BookService(book_repo, author_repo)

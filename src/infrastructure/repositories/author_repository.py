@@ -1,6 +1,7 @@
-from sqlalchemy.orm import Session
+from sqlalchemy.orm import Session, joinedload
 
 from src.domain.aggregates.author.author import Author
+from src.domain.aggregates.author.book import Book
 from src.domain.aggregates.author.author_repository_interface import AuthorRepositoryInterface
 from src.infrastructure.models.author_model import AuthorModel
 
@@ -18,10 +19,28 @@ class AuthorRepository(AuthorRepositoryInterface):
             raise Exception(f"Autor com ID {uid} não encontrado.")
         return Author(uid=author.id, name=author.name)
 
+
     def find_all(self) -> list[Author]:
-        """Retorna todos os autores armazenados."""
-        authors = self.db_session.query(AuthorModel).all()
-        return [Author(uid=a.id, name=a.name) for a in authors]
+        """Retorna todos os autores armazenados junto com seus livros."""
+        authors = (
+            self.db_session.query(AuthorModel)
+            .options(joinedload(AuthorModel.books))  
+            .all()
+        )
+        return [
+            Author(
+                uid=a.id,
+                name=a.name,
+                books=[
+                    Book(
+                        uid=b.id, 
+                        title=b.title, 
+                        author_id=b.author_id
+                    ) 
+                    for b in a.books]
+            )
+            for a in authors
+        ]
 
     def create(self, author: Author) -> None:
         """Adiciona um novo autor ao banco de dados."""

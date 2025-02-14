@@ -1,8 +1,10 @@
 from typing import List
+import uuid 
 
 from src.application.services.author_service_interface import AuthorServiceInterface
-from src.application.dtos.author_dto import AuthorCreateDTO, AuthorAddBookDTO, AuthorResponseDTO
+from src.application.dtos.author_dto import AuthorCreateDTO, AuthorResponseDTO
 from src.application.dtos.book_dto import BookResponseDTO
+from src.domain.aggregates.author.author import Author
 from src.domain.aggregates.author.author_repository_interface import AuthorRepositoryInterface
 from src.domain.aggregates.author.book_repository_interface import BookRepositoryInterface
 
@@ -28,16 +30,8 @@ class AuthorService(AuthorServiceInterface):
 
     def create_author(self, author_dto: AuthorCreateDTO) -> AuthorResponseDTO:
         """Cria um novo autor e retorna um DTO de resposta."""
-        author = self.author_repository.create(author_dto.name)
+        author_id = str(uuid.uuid4())
+        author = Author(uid=author_id, name=author_dto.name)
+
+        self.author_repository.create(author)
         return AuthorResponseDTO(id=author.id, name=author.name, books=[])
-
-    def add_book_to_author(self, author_id: str, book_dto: AuthorAddBookDTO) -> None:
-        """Adiciona um livro a um autor existente."""
-        author = self.author_repository.find(author_id)
-        book = self.book_repository.find(book_dto.book_id)
-
-        if not book:
-            raise Exception("Livro não encontrado.")
-
-        author.add_book(book)
-        self.author_repository.update(author)

@@ -16,3 +16,6 @@ class Book(Entity):
         super().__init__(uid)
         self.title = title
         self.author_id = author_id
+
+        # Disparar evento de criação do livro
+        self.add_domain_event(f"Livro {self.title} do Autor id {self.author_id} criado", "BookCreated")

@@ -11,4 +11,4 @@ class BookResponseDTO(BaseModel):
     """DTO para resposta contendo dados do livro."""
     id: str
     title: str
-    author_name: str  # Nome do autor ao invés do ID
+    author_name: str

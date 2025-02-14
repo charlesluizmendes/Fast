@@ -14,8 +14,3 @@ class AuthorResponseDTO(BaseModel):
     id: str
     name: str
     books: List[BookResponseDTO]
-
-
-class AuthorAddBookDTO(BaseModel):
-    """DTO para adicionar um livro ao autor."""
-    book_id: str
