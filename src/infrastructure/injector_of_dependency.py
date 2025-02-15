@@ -1,13 +1,15 @@
 from fastapi import Depends
 
-from src.application.services.author_service import AuthorService
-from src.application.services.book_service import BookService
-from src.application.services.user_service import UserService
-from src.application.eventHandlers.author_created_event_handler import AuthorCreatedEventHandler
-from src.application.eventHandlers.book_created_event_handler import BookCreatedEventHandler
 from src.domain.shared.event.dispatcher.event_dispatcher import EventDispatcher
 from src.domain.events.author_created_event import AuthorCreatedEvent
 from src.domain.events.book_created_event import BookCreatedEvent
+
+from src.application.services.user_service import UserService
+from src.application.services.author_service import AuthorService
+from src.application.services.book_service import BookService
+from src.application.eventHandlers.author_created_event_handler import AuthorCreatedEventHandler
+from src.application.eventHandlers.book_created_event_handler import BookCreatedEventHandler
+
 from src.infrastructure.database.database_context import DatabaseContext
 from src.infrastructure.repositories.user_repository import UserRepository
 from src.infrastructure.repositories.author_repository import AuthorRepository
@@ -52,5 +54,14 @@ def get_user_service(user_repository=Depends(get_user_repository)):
 
 # EventHandlers 
 
-EventDispatcher.register_event_handler(AuthorCreatedEvent, AuthorCreatedEventHandler())
-EventDispatcher.register_event_handler(BookCreatedEvent, BookCreatedEventHandler())
+def get_author_created_event_handler():
+    return AuthorCreatedEventHandler()
+
+def get_book_created_event_handler():
+    return BookCreatedEventHandler()
+
+def register_event_handlers():
+    EventDispatcher.register_event_handler(AuthorCreatedEvent, get_author_created_event_handler())
+    EventDispatcher.register_event_handler(BookCreatedEvent, get_book_created_event_handler())
+
+register_event_handlers()

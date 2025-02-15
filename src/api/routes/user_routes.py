@@ -2,7 +2,7 @@ from fastapi import APIRouter, Depends
 
 from src.application.services.user_service import UserService
 from src.application.dtos.user_dto import UserCreateDTO, UserResponseDTO, UserLoginDTO, UserLoginResponseDTO
-from src.api.ioc import get_user_service
+from src.infrastructure.injector_of_dependency import get_user_service
 
 
 router = APIRouter(prefix="/user", tags=["Users"])

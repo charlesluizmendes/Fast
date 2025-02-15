@@ -1,9 +1,10 @@
 from fastapi import APIRouter, Depends
 
+from src.api.auth import verify_token
 from src.application.services.book_service import BookService
 from src.application.dtos.book_dto import BookCreateDTO, BookResponseDTO
-from src.application.utils.user_util import verify_token
-from src.api.ioc import get_book_service
+from src.infrastructure.injector_of_dependency import get_book_service
+
 
 router = APIRouter(prefix="/books", tags=["Books"])
 

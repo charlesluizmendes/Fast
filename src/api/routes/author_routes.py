@@ -1,10 +1,11 @@
 from fastapi import APIRouter, Depends
 from typing import List
 
+from src.api.auth import verify_token
 from src.application.services.author_service import AuthorService
 from src.application.dtos.author_dto import AuthorCreateDTO, AuthorResponseDTO
-from src.application.utils.user_util import verify_token
-from src.api.ioc import get_author_service
+from src.infrastructure.injector_of_dependency import get_author_service
+
 
 router = APIRouter(prefix="/authors", tags=["Authors"])
 
