@@ -10,11 +10,11 @@ router = APIRouter(prefix="/authors", tags=["Authors"])
 
 @router.get("/", response_model=List[AuthorResponseDTO])
 async def get_all_authors(service: AuthorService = Depends(get_author_service), 
-    user: dict = Depends(verify_token)):
+        user: dict = Depends(verify_token)):
     return service.get_all_authors()
 
 @router.post("/", response_model=AuthorResponseDTO)
 async def create_author(author: AuthorCreateDTO, 
-    service: AuthorService = Depends(get_author_service), 
-    user: dict = Depends(verify_token)):
+        service: AuthorService = Depends(get_author_service), 
+        user: dict = Depends(verify_token)):
     return service.create_author(author)

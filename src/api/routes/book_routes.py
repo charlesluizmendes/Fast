@@ -9,6 +9,6 @@ router = APIRouter(prefix="/books", tags=["Books"])
 
 @router.post("/", response_model=BookResponseDTO)
 async def create_book(book: BookCreateDTO, 
-    service: BookService = Depends(get_book_service),
-    user: dict = Depends(verify_token)):
+        service: BookService = Depends(get_book_service),
+        user: dict = Depends(verify_token)):
     return service.create_book(book)
