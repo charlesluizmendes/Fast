@@ -12,6 +12,7 @@ class Author(AggregateRootInterface):
 
     def __init__(self, uid: str, name: str, books: List[Book] = None):
         """Inicializa o autor com um ID e nome."""
+        
         if not uid.strip():
             raise DomainException("O id do autor não pode estar vazio.")
 

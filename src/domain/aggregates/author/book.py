@@ -10,6 +10,7 @@ class Book(Entity):
 
     def __init__(self, uid: str, title: str, author_id: str):
         """Inicializa o livro com um ID, título e ID do autor."""
+        
         if not title.strip():
             raise DomainException("O título do livro não pode estar vazio.")
 
