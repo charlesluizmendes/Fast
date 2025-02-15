@@ -8,10 +8,10 @@ async def error_handler(request: Request, call_next):
     except ValueError as e:
         return JSONResponse(
             status_code=400,
-            content={"error": str(e)}
+            content={"detail": str(e)}
         )
     except Exception as e:
         return JSONResponse(
-            status_code=400,
-            content={"Erro": str(e)}
+            status_code=500,
+            content={"error": str(e)}
         )

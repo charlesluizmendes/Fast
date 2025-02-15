@@ -1,4 +1,4 @@
-class DomainException(Exception):
+class DomainException(ValueError):
     """Exceção para erros de domínio."""
     message: str
 
