@@ -1,7 +1,8 @@
 from fastapi import Request
 from fastapi.responses import JSONResponse
 
-async def error_handler(request: Request, call_next):
+
+async def error_request(request: Request, call_next):
     """Middleware para capturar e tratar erros da aplicação."""
     try:
         return await call_next(request)

@@ -23,5 +23,4 @@ class Author(AggregateRootInterface):
         self.name = name
         self.books = []
 
-        # Disparar evento de criação do autor
         self.add_domain_event(AuthorCreatedEvent(datetime.now(), self.name))
