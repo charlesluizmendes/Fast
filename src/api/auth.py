@@ -1,14 +1,15 @@
 import jwt
 from fastapi import Depends, HTTPException, status
-from fastapi.security import OAuth2PasswordBearer
+from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 
 from src.api.config import config
 
 
-oauth2_scheme = OAuth2PasswordBearer(tokenUrl="user")
+auth_scheme = HTTPBearer()
 
-def verify_token(token: str = Depends(oauth2_scheme)):
+def verify_token(credentials: HTTPAuthorizationCredentials = Depends(auth_scheme)):
     """Verifica se o token JWT é válido."""
+    token = credentials.credentials
     try:
         payload = jwt.decode(token, config.SECRET_KEY, algorithms=[config.ALGORITHM])
         user = payload.get("user") 

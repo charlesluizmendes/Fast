@@ -7,8 +7,14 @@ from src.api.routes.author_routes import router as author_router
 from src.api.routes.book_routes import router as book_router
 from src.api.routes.user_routes import router as user_router
 
-
-app = FastAPI(title="Author and Books API", version="1.0")
+app = FastAPI(
+    title="Author and Books API", 
+    version="1.0",
+    swagger_ui_parameters={
+        "persistAuthorization": True,  # Mantém o token salvo no Swagger após atualização da página
+        "displayRequestDuration": True,  # Mostra o tempo de resposta das requisições
+    }
+)
 
 app.middleware("http")(error_handler)
 
