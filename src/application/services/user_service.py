@@ -16,6 +16,11 @@ class UserService(UserServiceInterface):
 
     def create_user(self, user_dto: UserCreateDTO) -> UserResponseDTO:
         """Cria um novo usuário e retorna um DTO de resposta."""
+        user_exist = self.user_repository.find_by_email(user_dto.email)
+
+        if user_exist is not None:
+            raise ValueError("E-mail já utilizado")
+
         user_id = str(uuid.uuid4())
         password_hash = get_password_hash(user_dto.password)
         user = User(uid=user_id, name=user_dto.name, email=user_dto.email, password=password_hash)
