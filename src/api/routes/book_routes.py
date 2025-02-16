@@ -8,7 +8,7 @@ from src.infrastructure.injector_of_dependency import get_book_service
 
 router = APIRouter(prefix="/books", tags=["Books"])
 
-@router.post("/", response_model=BookResponseDTO)
+@router.post("/create", response_model=BookResponseDTO, status_code=201)
 async def create_book(book: BookCreateDTO, 
         service: BookService = Depends(get_book_service),
         user: dict = Depends(verify_token)):

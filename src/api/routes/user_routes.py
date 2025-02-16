@@ -7,12 +7,12 @@ from src.infrastructure.injector_of_dependency import get_user_service
 
 router = APIRouter(prefix="/user", tags=["Users"])
 
-@router.post("/create/", response_model=UserResponseDTO)
+@router.post("/create/", response_model=UserResponseDTO, status_code=201)
 async def create_user(user: UserCreateDTO, 
         service: UserService = Depends(get_user_service)):
     return service.create_user(user)
 
-@router.post("/login/", response_model=UserLoginResponseDTO)
+@router.post("/login/", response_model=UserLoginResponseDTO, status_code=200)
 async def login_user(user: UserLoginDTO, 
         service: UserService = Depends(get_user_service)):
     return service.login_user(user)
