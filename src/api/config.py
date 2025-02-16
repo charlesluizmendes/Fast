@@ -1,7 +1,7 @@
 import os
 from dotenv import load_dotenv
 
-load_dotenv(dotenv_path="src/api/.env")
+load_dotenv(dotenv_path=".env")
 
 class Config:
     """Configurações da aplicação, carregando do .env."""
